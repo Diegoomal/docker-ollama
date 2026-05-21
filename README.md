@@ -44,4 +44,21 @@ docker compose logs -f ollama
 
 docker exec -it ollama nvidia-smi
 
+curl http://localhost:11435/api/pull \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "llama3.2:1b",
+    "stream": false
+  }'
+
+curl http://localhost:11435/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "llama3.2:1b",
+    "prompt": "Why is the sky blue?",
+    "stream": false
+  }' | jq -r '.response'
+
+curl http://localhost:11435/api/tags | jq
+
 -->
