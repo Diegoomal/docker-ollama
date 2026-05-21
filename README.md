@@ -1,21 +1,14 @@
 # docker | Ollama
 
-
 ## Default configs
 
+Command to build
 ``` docker compose up -d --build ```
 
+Show API
 ``` curl http://localhost:11434/api/tags ```
 
-
-## Custom configs
-
-``` HOST_ADDRESS=0.0.0.0 HOST_PORT=11435 MODEL_NAME=qwen3.5:0.8b docker compose up -d --build ```
-
-``` curl http://localhost:11435/api/tags ```
-
-## Simple Request
-
+Simple Request
 ```
 curl http://localhost:11434/api/generate \
   -H "Content-Type: application/json" \
@@ -26,13 +19,20 @@ curl http://localhost:11434/api/generate \
   }'
 ```
 
-## Simple Request with jq
+## Custom configs
 
+Command to build
+``` HOST_ADDRESS=0.0.0.0 HOST_PORT=11435 MODEL_NAME=qwen3:0.6b docker compose up -d --build ```
+
+Show API
+``` curl http://localhost:11435/api/tags ```
+
+Simple Request
 ```
-curl http://localhost:11434/api/generate \
+curl http://localhost:11435/api/generate \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "llama3.2:1b",
+    "model": "qwen3:0.6b",
     "prompt": "Why is the sky blue?",
     "stream": false
   }' | jq -r '.response'
