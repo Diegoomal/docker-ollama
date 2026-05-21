@@ -37,3 +37,11 @@ curl http://localhost:11435/api/generate \
     "stream": false
   }' | jq -r '.response'
 ```
+
+<!-- 
+
+docker compose logs -f ollama
+
+docker exec -it ollama nvidia-smi
+
+-->
