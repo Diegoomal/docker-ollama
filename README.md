@@ -44,6 +44,7 @@ docker compose logs -f ollama
 
 docker exec -it ollama nvidia-smi
 
+// download a model
 curl http://localhost:11435/api/pull \
   -H "Content-Type: application/json" \
   -d '{
@@ -51,6 +52,7 @@ curl http://localhost:11435/api/pull \
     "stream": false
   }'
 
+// make a resquest
 curl http://localhost:11435/api/generate \
   -H "Content-Type: application/json" \
   -d '{
@@ -59,6 +61,17 @@ curl http://localhost:11435/api/generate \
     "stream": false
   }' | jq -r '.response'
 
+// show list of models
 curl http://localhost:11435/api/tags | jq
+
+// unload model from memory
+curl http://localhost:11434/api/generate \
+  -d '{
+    "model": "llama3.2:1b",
+    "keep_alive": 0
+  }'
+
+// stop service
+docker stop ollama
 
 -->
